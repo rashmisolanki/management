@@ -31,16 +31,15 @@ public class UserService {
         userEntity.setUsername(userdto.getUsername());
         userEntity.setPassword(userdto.getPassword());
         userEntity.setMailid(userdto.getEmailid());
-        Set<RoleEntity> roleEntityList=new HashSet<>();
-        Set<String> roleList=userdto.getRole();
-        for (String str:roleList){
-            RoleEntity roleEntity=new RoleEntity();
-            roleEntity.setRole(str);
-            roleEntity.setUserEntity(userEntity);
-            roleEntityList.add(roleEntity);
-
-        }
-        userEntity.setRoleEntitySet(roleEntityList);
+       // Set<RoleEntity> roleEntityList=new HashSet<>();
+//        Set<String> roleList=userdto.getRole();
+//        for (String str:roleList){
+//            RoleEntity roleEntity=new RoleEntity();
+//            roleEntity.setRole(str);
+//            roleEntity.setUserEntity(userEntity);
+//            roleEntityList.add(roleEntity);
+//        }
+        //userEntity.setRoleEntitySet(roleEntityList);
 
         userRepo.save(userEntity);
 
@@ -48,8 +47,8 @@ public class UserService {
         userResponse.setUsername(userEntity.getUsername());
         userResponse.setPassword(userEntity.getPassword());
         userResponse.setEmailid(userEntity.getMailid());
-      Set<String> dbRoleList=userEntity.getRoleEntitySet().stream().map(RoleEntity::getRole).collect(Collectors.toSet());
-        userResponse.setRole(dbRoleList);
+      //Set<String> dbRoleList=userEntity.getRoleEntitySet().stream().map(RoleEntity::getRole).collect(Collectors.toSet());
+        //userResponse.setRole(dbRoleList);
         return userResponse;
     }
 

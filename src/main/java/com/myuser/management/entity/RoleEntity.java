@@ -1,10 +1,7 @@
 package com.myuser.management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -20,7 +17,8 @@ public class RoleEntity {
     Long id;
     @Column
     String role;
+    @JsonIgnoreProperties("roleEntitySet")
     @ManyToOne
     @JoinColumn(name="username")
-    private UserEntity userEntity;
+    private UserEntity user;
 }

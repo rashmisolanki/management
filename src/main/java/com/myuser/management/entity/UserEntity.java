@@ -1,13 +1,9 @@
 package com.myuser.management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 
@@ -24,7 +20,8 @@ public class UserEntity {
     String password;
     @Column
     String mailid;
-    @OneToMany(mappedBy = "userEntity",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<RoleEntity> roleEntitySet;
 
 }

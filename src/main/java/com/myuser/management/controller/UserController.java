@@ -3,10 +3,10 @@ package com.myuser.management.controller;
 import com.myuser.management.Service.RoleService;
 import com.myuser.management.Service.UserService;
 import com.myuser.management.dto.RoleDto;
-import com.myuser.management.dto.RoleResponse;
 import com.myuser.management.dto.UserDto;
 import com.myuser.management.dto.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,9 +28,11 @@ public class UserController {
         return userService.create(user);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/role/create")
-    public RoleResponse createRole(@RequestBody RoleDto role)
+    public void createRole(@RequestBody RoleDto role)
     {
-        return roleService.createRole(role);
+        roleService.createRole(role);
     }
+
 }
