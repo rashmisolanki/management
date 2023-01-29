@@ -18,5 +18,12 @@ public class GlobalExceptionHandler
         ErrorDetails errorDetails=new ErrorDetails(new Date(),ex.getMessage(), webRequest.getDescription(false));
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDetails);
     }
+
+    @ExceptionHandler(UserAlreadyPresent.class)
+    public ResponseEntity<ErrorDetails> UserAlreadyPresent(UserAlreadyPresent ex, WebRequest webRequest)
+    {
+        ErrorDetails errorDetails=new ErrorDetails(new Date(),ex.getMessage(), webRequest.getDescription(false));
+        return ResponseEntity.status(HttpStatus.OK).body(errorDetails);
+    }
 }
 

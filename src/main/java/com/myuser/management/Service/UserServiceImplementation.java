@@ -1,25 +1,15 @@
 package com.myuser.management.Service;
 
-import com.myuser.management.Repositary.RoleRepo;
 import com.myuser.management.Repositary.UserRepo;
-import com.myuser.management.dto.RoleDto;
-import com.myuser.management.dto.RoleResponse;
 import com.myuser.management.dto.UserDto;
 import com.myuser.management.dto.UserResponse;
-import com.myuser.management.entity.RoleEntity;
 import com.myuser.management.entity.UserEntity;
 import com.myuser.management.exception.UserAlreadyPresent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @Service
-public class UserService {
+public class UserServiceImplementation implements UserService{
     @Autowired
     private UserRepo userRepo;
     public UserResponse create(UserDto userdto)

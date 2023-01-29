@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class RoleService {
+public class RoleServiceImplementation implements RoleService {
 
     @Autowired
     private RoleRepo roleRepo;
