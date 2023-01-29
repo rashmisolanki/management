@@ -8,6 +8,7 @@ import com.myuser.management.dto.UserDto;
 import com.myuser.management.dto.UserResponse;
 import com.myuser.management.entity.RoleEntity;
 import com.myuser.management.entity.UserEntity;
+import com.myuser.management.exception.UserAlreadyPresent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepo userRepo;
-
-
     public UserResponse create(UserDto userdto)
     {
         UserEntity userEntity=new UserEntity();
@@ -40,16 +38,20 @@ public class UserService {
 //            roleEntityList.add(roleEntity);
 //        }
         //userEntity.setRoleEntitySet(roleEntityList);
-
-        userRepo.save(userEntity);
-
-        UserResponse userResponse=new UserResponse();
-        userResponse.setUsername(userEntity.getUsername());
-        userResponse.setPassword(userEntity.getPassword());
-        userResponse.setEmailid(userEntity.getMailid());
-      //Set<String> dbRoleList=userEntity.getRoleEntitySet().stream().map(RoleEntity::getRole).collect(Collectors.toSet());
-        //userResponse.setRole(dbRoleList);
-        return userResponse;
+        if(userRepo.existsById(userEntity.getUsername()))
+        {
+            throw new UserAlreadyPresent("user is already registered");
+        }
+        else {
+            userRepo.save(userEntity);
+            UserResponse userResponse = new UserResponse();
+            userResponse.setUsername(userEntity.getUsername());
+            userResponse.setPassword(userEntity.getPassword());
+            userResponse.setEmailid(userEntity.getMailid());
+            //Set<String> dbRoleList=userEntity.getRoleEntitySet().stream().map(RoleEntity::getRole).collect(Collectors.toSet());
+            //userResponse.setRole(dbRoleList);
+            return userResponse;
+        }
     }
 
 
